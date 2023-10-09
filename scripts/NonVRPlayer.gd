@@ -21,6 +21,9 @@ var reset_rotation: Vector3
 
 var is_oob := false
 
+func _ready():
+	Events.oob_timed_out.connect(_on_oob_timed_out)
+
 func _physics_process(delta):
 #	# Add the gravity.
 #	if not is_on_floor():
@@ -83,3 +86,8 @@ func _handle_anti_peek():
 	elif anti_peek_ray.is_colliding() and is_oob:
 		Events.emit_signal("player_went_in_bounds", self)
 		is_oob = false
+
+
+func _on_oob_timed_out():
+	self.position = reset_position
+	self.rotation = reset_rotation

@@ -3,12 +3,51 @@
 [ext_resource type="PackedScene" uid="uid://dda4uoop1sq74" path="res://TeleportArea.tscn" id="1_5cktn"]
 [ext_resource type="Script" path="res://scripts/TeleportManager.gd" id="1_f3uu5"]
 [ext_resource type="Script" path="res://scripts/NonVRPlayer.gd" id="1_vhb5e"]
+[ext_resource type="Script" path="res://scripts/OOBHandler.gd" id="4_08t3v"]
 [ext_resource type="Script" path="res://scripts/Blink.gd" id="4_d4kjc"]
-[ext_resource type="Script" path="res://scripts/OOBNotif.gd" id="5_1l6ys"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1upcg"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_0qi1e"]
+
+[sub_resource type="Animation" id="Animation_7waqb"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("VBoxContainer/Label:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("VBoxContainer/TimerLabel:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_bjrdi"]
 resource_name = "fade"
@@ -50,7 +89,13 @@ tracks/2/keys = {
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 
-[sub_resource type="Animation" id="Animation_7waqb"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_d6som"]
+_data = {
+"RESET": SubResource("Animation_7waqb"),
+"fade": SubResource("Animation_bjrdi")
+}
+
+[sub_resource type="Animation" id="Animation_8tfay"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -62,37 +107,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(1, 0, 0, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("VBoxContainer/Label:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 0)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("VBoxContainer/TimerLabel:modulate")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_d6som"]
-_data = {
-"RESET": SubResource("Animation_7waqb"),
-"fade": SubResource("Animation_bjrdi")
+"values": [Color(0, 0, 0, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_4x76p"]
@@ -109,21 +124,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_8tfay"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("ColorRect:color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(0, 0, 0, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_83bsv"]
@@ -193,7 +193,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("5_1l6ys")
+script = ExtResource("4_08t3v")
 metadata/_edit_lock_ = true
 
 [node name="ColorRect" type="ColorRect" parent="UI/OOBNotif"]

@@ -3,7 +3,7 @@ extends Node3D
 
 func _ready():
 	Events.player_teleport_requested.connect(_on_player_teleport_requested)
-	
+
 
 func _on_player_teleport_requested(player: Node3D, teleport_area: TeleportArea):
 	player.position = teleport_area.teleport_position.global_position
