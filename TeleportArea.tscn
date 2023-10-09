@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://dda4uoop1sq74"]
+
+[ext_resource type="Script" path="res://scripts/TeleportArea.gd" id="1_c2vka"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cucmv"]
+size = Vector3(10, 0.1, 10)
+
+[sub_resource type="BoxMesh" id="BoxMesh_2ixj0"]
+size = Vector3(10, 0.1, 10)
+
+[node name="TeleportArea" type="StaticBody3D"]
+collision_layer = 513
+collision_mask = 0
+script = ExtResource("1_c2vka")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_cucmv")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_2ixj0")
+
+[node name="TeleportPosition" type="Marker3D" parent="."]
+gizmo_extents = 8.0

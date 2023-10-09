@@ -1,0 +1,267 @@
+[gd_scene load_steps=14 format=3 uid="uid://bam3vjitl0jnl"]
+
+[ext_resource type="PackedScene" uid="uid://dda4uoop1sq74" path="res://TeleportArea.tscn" id="1_5cktn"]
+[ext_resource type="Script" path="res://scripts/TeleportManager.gd" id="1_f3uu5"]
+[ext_resource type="Script" path="res://scripts/NonVRPlayer.gd" id="1_vhb5e"]
+[ext_resource type="Script" path="res://scripts/Blink.gd" id="4_d4kjc"]
+[ext_resource type="Script" path="res://scripts/OOBNotif.gd" id="5_1l6ys"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1upcg"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_0qi1e"]
+
+[sub_resource type="Animation" id="Animation_bjrdi"]
+resource_name = "fade"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 0, 0, 0), Color(1, 0, 0, 0.388235)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("VBoxContainer/Label:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("VBoxContainer/TimerLabel:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_7waqb"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("VBoxContainer/Label:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("VBoxContainer/TimerLabel:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_d6som"]
+_data = {
+"RESET": SubResource("Animation_7waqb"),
+"fade": SubResource("Animation_bjrdi")
+}
+
+[sub_resource type="Animation" id="Animation_4x76p"]
+resource_name = "fade"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_8tfay"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_83bsv"]
+_data = {
+"RESET": SubResource("Animation_8tfay"),
+"fade": SubResource("Animation_4x76p")
+}
+
+[node name="Main" type="Node3D"]
+
+[node name="TeleportAreas" type="Node3D" parent="."]
+script = ExtResource("1_f3uu5")
+
+[node name="TeleportArea" parent="TeleportAreas" instance=ExtResource("1_5cktn")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+
+[node name="TeleportArea2" parent="TeleportAreas" instance=ExtResource("1_5cktn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, 13)
+
+[node name="TeleportPosition" parent="TeleportAreas/TeleportArea2" index="2"]
+transform = Transform3D(-0.5, 0, 0.866025, 0, 1, 0, -0.866025, 0, -0.5, 0, 0, 0)
+gizmo_extents = 6.51
+
+[node name="TeleportArea3" parent="TeleportAreas" instance=ExtResource("1_5cktn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 17)
+
+[node name="TeleportPosition" parent="TeleportAreas/TeleportArea3" index="2"]
+transform = Transform3D(-0.964428, 0, -0.264344, 0, 1, 0, 0.264344, 0, -0.964428, 0, 0, 0)
+
+[node name="NonVRPlayer" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+script = ExtResource("1_vhb5e")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NonVRPlayer"]
+shape = SubResource("CapsuleShape3D_1upcg")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NonVRPlayer"]
+mesh = SubResource("CapsuleMesh_0qi1e")
+
+[node name="Camera3D" type="Camera3D" parent="NonVRPlayer"]
+transform = Transform3D(-1, -2.26267e-08, 8.44439e-08, 0, 0.965926, 0.258819, -8.74228e-08, 0.258819, -0.965926, 0, 2, -2.195)
+
+[node name="RayCast3D" type="RayCast3D" parent="NonVRPlayer"]
+collision_mask = 512
+debug_shape_custom_color = Color(0, 0, 1, 1)
+
+[node name="AntiPeekRaycast" type="RayCast3D" parent="NonVRPlayer"]
+target_position = Vector3(0, -3, 0)
+collision_mask = 512
+debug_shape_custom_color = Color(0, 0, 1, 1)
+
+[node name="OmniLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 7.95888, 0)
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="OOBNotif" type="Control" parent="UI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("5_1l6ys")
+metadata/_edit_lock_ = true
+
+[node name="ColorRect" type="ColorRect" parent="UI/OOBNotif"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 0, 0, 0)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/OOBNotif"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -31.5
+offset_top = -20.0
+offset_right = 31.5
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="UI/OOBNotif/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+text = "Reset at"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TimerLabel" type="Label" parent="UI/OOBNotif/VBoxContainer"]
+layout_mode = 2
+text = "Reset at"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/OOBNotif"]
+libraries = {
+"": SubResource("AnimationLibrary_d6som")
+}
+
+[node name="Blink" type="Control" parent="UI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_d4kjc")
+metadata/_edit_lock_ = true
+
+[node name="ColorRect" type="ColorRect" parent="UI/Blink"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0)
+metadata/_edit_lock_ = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/Blink"]
+libraries = {
+"": SubResource("AnimationLibrary_83bsv")
+}
+
+[editable path="TeleportAreas/TeleportArea2"]
+[editable path="TeleportAreas/TeleportArea3"]
