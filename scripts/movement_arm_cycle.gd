@@ -35,7 +35,7 @@ func _ready():
 	left_hand_old_pos = left_hand.position
 	right_hand_old_pos = right_hand.position
 
-
+# TODO: Use override functions from super class
 func _physics_process(delta):
 	var left_hand_new_pos := left_hand.position
 	var right_hand_new_pos := right_hand.position
