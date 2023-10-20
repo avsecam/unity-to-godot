@@ -43,7 +43,7 @@ var webxr_auto_primary := 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	var webxr_interface = XRServer.find_interface("WebXR")
+	var webxr_interface = XRServer.find_interface("OpenXR")
 	if webxr_interface:
 		XRServer.tracker_added.connect(self._on_webxr_tracker_added)
 

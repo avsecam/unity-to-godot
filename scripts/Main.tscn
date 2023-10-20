@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bam3vjitl0jnl"]
+[gd_scene load_steps=17 format=3 uid="uid://bam3vjitl0jnl"]
 
 [ext_resource type="PackedScene" uid="uid://dda4uoop1sq74" path="res://scripts/TeleportArea.tscn" id="1_5cktn"]
 [ext_resource type="Script" path="res://scripts/TeleportManager.gd" id="1_f3uu5"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://scripts/Blink.gd" id="4_d4kjc"]
 [ext_resource type="PackedScene" uid="uid://diyu06cw06syv" path="res://addons/godot-xr-tools/player/player_body.tscn" id="4_pmoh5"]
 [ext_resource type="PackedScene" uid="uid://fiul51tsyoop" path="res://addons/godot-xr-tools/functions/function_teleport.tscn" id="5_s0s7e"]
+[ext_resource type="PackedScene" uid="uid://bl2nuu3qhlb5k" path="res://addons/godot-xr-tools/functions/movement_direct.tscn" id="5_xbk0c"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_x0obv"]
 
@@ -170,7 +171,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.5, 0)
 tracker = &"left_hand"
 
-[node name="Node" type="Node" parent="XROrigin3D/LeftController"]
+[node name="MovementDirect" parent="XROrigin3D/LeftController" instance=ExtResource("5_xbk0c")]
+
+[node name="MovementArmCycling" type="Node" parent="XROrigin3D/LeftController" groups=["movement_providers"]]
 script = ExtResource("4_1o5ro")
 
 [node name="FunctionTeleport" parent="XROrigin3D/LeftController" instance=ExtResource("5_s0s7e")]

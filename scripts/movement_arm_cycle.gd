@@ -2,7 +2,7 @@ extends "res://addons/godot-xr-tools/functions/movement_provider.gd"
 
 
 ## Movement provider order
-@export var order : int = 10
+@export var order : int = 100000
 
 
 #	With arm–cycling, when the triggers on both the left (L) and right
@@ -36,7 +36,30 @@ func _ready():
 	right_hand_old_pos = right_hand.position
 
 # TODO: Use override functions from super class
-func _physics_process(delta):
+# func _physics_process(delta):
+# 	var left_hand_new_pos := left_hand.position
+# 	var right_hand_new_pos := right_hand.position
+# 	if _both_buttons_are_fully_pressed():
+# 		var translation_amount := Vector3(
+# 			abs(left_hand_old_pos.x - left_hand_new_pos.x) + \
+# 				abs(right_hand_old_pos.x - right_hand_new_pos.x),
+# 			0,
+# 			abs(left_hand_old_pos.z - left_hand_new_pos.z) + \
+# 				abs(right_hand_old_pos.z - right_hand_new_pos.z)
+# 		)
+		
+# 		origin.global_position += -hmd.global_transform.basis.z * translation_amount
+	
+# 	# Reset old_pos values
+# 	left_hand_old_pos = left_hand_new_pos
+# 	right_hand_old_pos = right_hand_new_pos
+
+
+func _both_buttons_are_fully_pressed():
+	return left_hand.get_float("grip") >= 1 && right_hand.get_float("grip") >= 1
+
+
+func physics_movement(delta: float, player_body: XRToolsPlayerBody, _disabled: bool):
 	var left_hand_new_pos := left_hand.position
 	var right_hand_new_pos := right_hand.position
 	if _both_buttons_are_fully_pressed():
@@ -48,15 +71,13 @@ func _physics_process(delta):
 				abs(right_hand_old_pos.z - right_hand_new_pos.z)
 		)
 		
-		origin.global_position += -hmd.global_transform.basis.z * translation_amount
-	
+		player_body.global_position += -hmd.global_transform.basis.z * translation_amount
+
+		# player_body.ground_control_velocity.x += hmd.global_transform.basis.z.x * (translation_amount.length() * 30)
+		# player_body.ground_control_velocity.y += -hmd.global_transform.basis.z.z * (translation_amount.length() * 30)
+		
+		print(player_body.position)
+
 	# Reset old_pos values
 	left_hand_old_pos = left_hand_new_pos
 	right_hand_old_pos = right_hand_new_pos
-
-
-func _both_buttons_are_fully_pressed():
-	return left_hand.get_float("grip") >= 1 && right_hand.get_float("grip") >= 1
-
-#func physics_movement(_delta: float, player_body: XRToolsPlayerBody, _disabled: bool):
-#	player_body.ground_control_velocity.y += 10
