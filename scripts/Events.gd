@@ -1,6 +1,8 @@
 extends Node
 
 
+signal teleport_area_is_targeted(teleport_area: TeleportArea)
+
 signal player_teleport_requested(player: Node3D, teleport_area: TeleportArea)
 
 signal player_went_oob(player: Node3D)

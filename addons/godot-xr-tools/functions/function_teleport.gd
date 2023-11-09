@@ -92,6 +92,8 @@ var last_target_transform : Transform3D = Transform3D()
 var collision_shape : Shape3D
 var step_size : float = 0.5
 
+var targeted_teleport_area : TeleportArea
+
 
 # Custom player scene
 var player : Node3D
@@ -260,6 +262,10 @@ func _physics_process(delta):
 						floor_normal = intersects["normal"]
 						var dot := up.dot(floor_normal)
 
+						if intersects["collider"] is TeleportArea:
+							targeted_teleport_area = intersects["collider"]
+							Events.emit_signal("teleport_area_is_targeted", targeted_teleport_area)
+						
 						if dot > max_slope_cos:
 							is_on_floor = true
 						else:
@@ -280,8 +286,11 @@ func _physics_process(delta):
 				# we are colliding, find our if we're colliding on a wall or
 				# floor, one we can do, the other nope...
 				cast_length += (collided_at - target_global_origin).length()
-				target_global_origin = collided_at
+				# target_global_origin = collided_at
+				target_global_origin = targeted_teleport_area.teleport_position.global_position
 				hit_something = true
+				
+				# TODO: Add check for teleport area.
 				break
 
 		# and just update our shader
@@ -311,7 +320,7 @@ func _physics_process(delta):
 			target_basis = target_basis.rotated(normal, teleport_rotation)
 			last_target_transform.basis = target_basis
 			last_target_transform.origin = target_global_origin + up * 0.001
-			$Target.global_transform = last_target_transform
+			$Target.global_transform = targeted_teleport_area.teleport_position.global_transform
 
 			$Teleport.get_surface_override_material(0).set_shader_parameter("mix_color", color)
 			$Target.get_surface_override_material(0).albedo_color = color
@@ -328,7 +337,9 @@ func _physics_process(delta):
 			new_transform.basis.y = player_body.up_player
 			new_transform.basis.x = new_transform.basis.y.cross(new_transform.basis.z).normalized()
 			new_transform.basis.z = new_transform.basis.x.cross(new_transform.basis.y).normalized()
-
+			
+			# TODO: Add blinking.
+#			Events.player_teleport_requested.emit(self, teleport_area)
 			# Teleport the player
 			player_body.teleport(new_transform)
 

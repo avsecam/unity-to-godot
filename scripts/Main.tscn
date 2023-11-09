@@ -146,7 +146,7 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, 13)
 
 [node name="TeleportPosition" parent="TeleportAreas/TeleportArea2" index="2"]
-transform = Transform3D(-0.5, 0, 0.866025, 0, 1, 0, -0.866025, 0, -0.5, 0, 0, 0)
+transform = Transform3D(-0.5, 0, 0.866025, 0, 1, 0, -0.866025, 0, -0.5, -4.46938, 0, 4.3712)
 gizmo_extents = 6.51
 
 [node name="TeleportArea3" parent="TeleportAreas" instance=ExtResource("1_5cktn")]
@@ -175,9 +175,9 @@ tracker = &"left_hand"
 
 [node name="MovementArmCycling" type="Node" parent="XROrigin3D/LeftController" groups=["movement_providers"]]
 script = ExtResource("4_1o5ro")
+order = 11
 
 [node name="FunctionTeleport" parent="XROrigin3D/LeftController" instance=ExtResource("5_s0s7e")]
-enabled = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="XROrigin3D/LeftController"]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
